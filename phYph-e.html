@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{Title}</title>
+       <!-- <link rel="shortcut icon" href="{Favicon}">
+        <link rel="alternate" type="application/rss+xml" href="{RSS}">-->
+        {block:Description}
+            <meta name="description" content="{MetaDescription}" />
+        {/block:Description}
+        <meta name="font:Body" content="'ge_geek', Arial, helvetica, sans-serif;"/>
+        <meta name="font:Title" content="Arial, Helvetica, sans-serif"/>
+        <meta name="font:Description" content="Arial, Helvetica, sans-serif"/>
+        <meta name="font:Buttons" content="Arial, Helvetica, sans-serif"/>
+        <meta name="font:Decorations" content="Arial, Helvetica, sans-serif"/>
+        <meta name="image:Background" content=""/>
+        <meta name="color:Background" content="#2f4b66"/>
+        <meta name="color:Title" content="#eee"/>
+        <meta name="color:PostTitleColor" content="Grey"/>
+        <meta name="color:PostTextColor" content="White"/>
+        <meta name="color:PostBackground" content="Black"/>
+        <meta name="color:RootColor" content="#fff"/>
+        <meta name="color:RootTextColor" content="black"/>
+        <meta name="color:Permalink" content="grey"/>
+        <meta name="color:LinkColor" content="#2f4b66"/>
+        <meta name="color:LinkHover" content="white"/>
+        <meta name="color:ScrolbarMain" content="Black"/>
+        <meta name="color:ScrolbarSecond" content="White"/>
+        <meta name="color:ScrolbarShadow" content="Grey"/>
+        <meta name="color:Buttons" content="grey"/>
+        <meta name="color:ButtonText" content="white"/>
+        <meta name="color:ButtonSelect" content="grey"/>
+        <meta name="if:BackgroundImage" content="1"/>
+        <meta name="if:DaySeparator" content="1"/>
+        <meta name="if:ActionButtonsWhite" content="0"/>
+        <meta name="if:FanMail" content="1"/>
+        <meta name="text:MessageLabel" content="MSG me"/>
+        <meta name="text:PostTransparency" content="0.9"/>
+        <meta name="text:RootTransparency" content="0.8"/>
+        <meta name="text:TitleHeight" content="100px"/>
+        <meta name="text:PostHeight" content="450px"/>
+        <meta name="text:PostWidth" content="450px"/>
+        <meta name="text:MinRootHeight" content="80px"/>
+        <meta name="text:TitleTextSize" content="50px"/>
+        <meta name="text:DescriptionTextSize" content="12px"/>
+        <meta name="text:PostTitleTextSize" content="20px"/>
+        <meta name="text:PostTextSize" content="12px"/>
+        <meta name="text:CurveAmount" content="5px"/>
+        <meta name="text:ScrollbarCurve" content="5px"/>
+        <meta name="text:ScrollbarWidth" content="12px"/>
+        <meta name="text:PortraitPage" content="/tagged/me"/>
+        <meta name="text:URLWithoutEnd" content="elijahstudios"/>
+        <meta name="text:ScrollSpeed" content="25"/>
+        <meta name="text:TransitionSpeed" content="0.3"/>
+        
+        <meta name="select:Background" content="100% 100%" title="Strech"/>
+        <meta name="select:Background" content="contain" title="Fit"/>
+        <meta name="select:Background" content="cover" title="Max"/>
+        <meta name="select:Background" content="initial" title="Repeat"/>
+
+        <style type="text/css" >
+            ::-webkit-scrollbar {
+                height: {text:ScrollbarWidth};
+	            width: {text:ScrollbarWidth};
+	            background: {color:ScrolbarMain};
+	            -webkit-border-radius: {text:ScrollbarCurve};
+            }
+            ::-webkit-scrollbar-thumb {
+                background: {color:ScrolbarSecond};
+                -webkit-border-radius: {text:ScrollbarCurve};
+                -webkit-box-shadow: 0px 5px 10px {color:ScrolbarShadow};
+            }
+            ::-webkit-scrollbar-thumb:hover {
+                background: {color:LinkHover};
+            }
+            ::-webkit-scrollbar-corner {
+                background: transparent;
+            }
+            body{
+                background-color:{color:Background};
+                {block:IfBackgroundImage}
+                background-image:url({image:Background});
+                background-attachment:fixed;
+                background-size:{select:Background};
+                {/block:IfBackgroundImage}
+                color:{color:PostTextColor};
+            }
+            a{
+                color:{color:LinkColor};
+                text-decoration:none;
+                font-weight:normal;
+            }
+            a:hover, a.h3:hover{
+                color:{color:LinkHover};
+            }
+            a.h3{
+                color:{color:PostTitleColor};
+            }
+
+            h3{
+                font-family: {font:Title};
+                font-size:{text:PostTitleTextSize};
+            }
+            h2{
+                font-family: {font:Body};
+                font-size:{text:PostTextSize};
+                font-weight:normal;
+                font-style:normal;
+                opacity:1;
+            }
+            .button{
+                opacity:0.5;
+                border:1px solid;
+                border-radius:3px;
+                background-color:{color:Buttons};
+                font-family: {font:Buttons};
+                font-size:{text:DescriptionTextSize};
+                color:black;
+                text-decoration:none;
+                width:75%;
+                transition:color {text:TransitionSpeed}s;
+            }
+            .buttonText{
+                color:{color:ButtonText};
+                text-align:center;
+                text-decoration:none;
+            }
+            .titlebar{
+                position:fixed;
+                color: {color:Title};
+                font-size: {text:TitleTextSize};
+                font-family: {font:Title};
+                width:100%;
+            }
+            .desc{
+                font-size: {text:DescriptionTextSize};
+                font-family: {font:Description};
+                vertical-align:top;
+            }
+            .fulltable{
+                opacity:{text:PostTransparency};
+                border-radius:{text:CurveAmount};
+                {block:IndexPage}height:{text:PostHeight};{/block:IndexPage}
+                {block:IndexPage}width:{text:PostWidth};{/block:IndexPage}
+                font-family: {font:Body};
+                background-color:{color:PostBackground};
+                overflow-y: auto;
+                overflow-x: auto;
+                scrollbar-face-color: {color:ScrolbarSecond};
+                scrollbar-track-color: {color:ScrolbarMain};
+                scrollbar-darkshadow-color: red;
+                scrollbar-arrow-color: {color:ScrolbarSecond}; 
+                scrollbar-shadow-color: {color:ScrolbarShadow};
+                
+                scrollbar-3dlight-color: transparent;
+                scrollbar-base-color: transparent; 
+                scrollbar-highlight-color: transparent;
+                transition:opacity {text:TransitionSpeed}s;
+            }
+            .fulltable:hover{
+                opacity:1;
+            }
+            .tagbar{
+                width:{text:PostWidth};
+
+                overflow-y:auto;
+                overflow-x:auto;
+                scrollbar-face-color: {color:ScrolbarSecond};
+                scrollbar-track-color: {color:ScrolbarMain};
+                scrollbar-darkshadow-color: red;
+                scrollbar-arrow-color: {color:ScrolbarSecond}; 
+                scrollbar-shadow-color: {color:ScrolbarShadow};
+                
+                scrollbar-3dlight-color: transparent;
+                scrollbar-base-color: transparent; 
+                scrollbar-highlight-color: transparent; 
+            }
+            .roots{
+                height:{text:MinRootHeight};
+                opacity:{text:RootTransparency};
+                background-color:{color:RootColor};
+                text-align:center;
+                font-family: {font:Title};
+                color:{color:RootTextColor};
+            }
+            
+            .answer{
+                border-radius:{text:CurveAmount};
+                background-color:{color:RootColor};
+                width:100%;
+            }
+            
+            .mouseover{
+                border-radius:{text:CurveAmount};
+                color:{color:RootTextColor};
+            }
+            
+            .leftRight{
+                border-radius:{text:CurveAmount};
+                opacity:{text:RootTransparency};
+                background-color:{color:PostBackground};
+                font-size:{text:DescriptionTextSize};
+                text-align:center;
+                font-family: {font:Decorations};
+                color:{color:PostTextColor};
+            }
+            
+            .changePage{
+                border-radius:{text:CurveAmount};
+                font-family: {font:Decorations};
+                color: {color:Title};         
+            }
+
+            .footer{
+                font-size:{text:DescriptionTextSize};
+                text-align:center;
+                font-family: {font:Decorations};
+            }
+
+
+        </style>
+    </head>
+    <body>
+    <div class="titlebar">
+    <table border="0" style="width:100%;" height={text:TitleHeight}>
+    <tr><td><table border="0" width=100% height={text:TitleHeight}>
+        <tr height=25%>
+        <td width=5%></td>
+        {block:IndexPage}<td width=25% style="border-radius:{text:CurveAmount};" onmouseover="permaOn(this)" onmouseout="permOff(this)">
+            <a href="{BlogURL}" style="color:{color:Title};">
+            <table border="0" width=100% height={text:TitleHeight}><tr><td>{title}</td></tr></table></a></td>{/block:IndexPage}
+        <td width={block:IndexPage}5% {/block:IndexPage}{block:PermalinkPage}30% {/block:PermalinkPage}></td>
+        <td width=40%>{block:IndexPage}<div class="desc">{Description}</div>{/block:IndexPage}</td>
+        <td width=5%></td>
+        {block:HasPages}
+        <td width=10% style="vertical-align:{ButtonAlign};">
+            <div class="desc">
+            <table border="0" width=100%>
+            {block:Pages}
+                <tr><td class="button" onmouseover="buttonOn(this)" onmouseout="buttonOff(this)">
+                <a href="{URL}">
+                    <div class="buttonText">
+                        {Label}
+                    </div>
+                </a>
+                </td></tr>
+            {/block:Pages}
+            </table>
+            </div>
+        </td>
+        {/block:HasPages}
+        <td width=10% style="vertical-align:{ButtonAlign};">
+            <div class="desc">
+            <table border="0" width=100%>
+            <tr><td class="button" onmouseover="buttonOn(this)" onmouseout="buttonOff(this)">
+                <a href="http://www.tumblr.com/follow/{text:URLWithoutEnd}">
+                    <div class="buttonText">
+                       +Follow
+                    </div>
+                </a>
+            </td></tr>
+            
+            {block:AskEnabled}
+            <tr><td class="button" onmouseover="buttonOn(this)" onmouseout="buttonOff(this)">
+                <a href="{BlogURL}ask">
+                    <div class="buttonText">
+                        {AskLabel}
+                    </div>
+                </a>
+            </td></tr>
+            {/block:AskEnabled}
+            
+            {block:IfFanMail}
+            <tr><td class="button" onmouseover="buttonOn(this)" onmouseout="buttonOff(this)">
+                <a href="http://www.tumblr.com/send/{text:URLWithoutEnd}">
+                    <div class="buttonText">
+                        {text:MessageLabel}
+                    </div>
+                </a>
+            </td></tr>
+            {/block:IfFanMail}
+            
+            {block:SubmissionsEnabled}
+            <tr><td class="button" onmouseover="buttonOn(this)" onmouseout="buttonOff(this)">
+                <a href="{BlogURL}submit">
+                    <div class="buttonText">
+                        {SubmitLabel}
+                    </div>
+                </a>
+            </td></tr>
+            {/block:SubmissionsEnabled}
+            
+            </table>
+            </div>
+        </td>
+        
+        <td style="border-radius:{text:CurveAmount};"onmouseover="buttonOn(this)" onmouseout="moreMeOff(this)">
+        <a href="{text:PortraitPage}"><div class="desc" style="text-align:center;">
+        <img style="border-radius:{text:CurveAmount};" src="{PortraitURL-64}">
+        <br>Me</div>
+        </a></td>
+    </tr></table>
+    </td></tr>
+    </table>
+    
+    
+    
+    {block:PermalinkPage}
+    <div class="titlebar">
+    <table border="0" style="width:100%;" height={text:TitleHeight}>
+    <tr><td><table border="0" width=100% height={text:TitleHeight}>
+        <tr height=25%>
+        <td width=75%></td>
+        <td width=25% style="border-radius:{text:CurveAmount};" onmouseover="permaOn(this)" onmouseout="permOff(this)">
+            <a href="{BlogURL}" style="color:{color:Title};">
+                <table border="0" width=100% height={text:TitleHeight}>
+                    <tr><td>{title}</td></tr>
+                </table>
+            </a></td>
+    </tr></table>
+    </td></tr>
+    </table>
+    </div>
+    {/block:PermalinkPage}
+    
+    
+    {block:IndexPage}
+    <table border="0" width=100% style="position:absolute;top:{text:TitleHeight};">
+    <tr height="{text:PostHeight}"><td> </td></tr>
+    <tr height="{text:MinRootHeight}"><td></td></tr>
+    <tr height="50px"><td>
+        <table border="0" width=100% height=100%>
+            <tr height=100%>
+            <td width="15%" class="leftRight" onmouseover="slideLeft()" onmouseout="slideOff()">
+                <<
+            </td>
+            
+            <td width=70% class="leftRight" class="footer" >
+             {block:PreviousPage}<a href="{PreviousPage}">< </a>{/block:PreviousPage}
+                    <a href="/archive"><i>Page {CurrentPage}/{TotalPages}</i></a>
+                    {block:NextPage}<a href="{NextPage}"> ></a>{/block:NextPage}
+                    <br>
+                    <a href="http://elijahstudios.tumblr.com"><div style="color:{color:PostTextColor};">Theme by Elijah Studios</div></a>
+            </td>
+            
+            <td width="15%" class="leftRight" onmouseover="slideRight()" onmouseout="slideOff()">
+                >>
+            </td>
+            </tr>
+        </table>
+    </td></tr>
+    </table>
+    {/block:IndexPage}
+               
+               
+               
+    </div>
+    <table border="0" style="border-radius:{text:CurveAmount};position:relative;{block:IndexPage}top:{text:TitleHeight};{/block:IndexPage}{block:PermalinkPage}top:0{/block:PermalinkPage}">
+        <tr>
+        {block:PreviousPage}
+            <td>
+            <a href="{PreviousPage}">
+             <table width=100px height={text:PostHeight} style="text-align:center;background-color:{color:PostBackground};opacity:{text:PostTransparency};border-radius:{text:CurveAmount};" border="0">
+                    <tr>
+                        <td class="changePage" onmouseover="buttonOn(this)" onmouseout="moreMeOff(this)">
+                            &#171; Previous<br>{CurrentPage}/{TotalPages}
+                        </td>
+                    </tr>
+            </table>
+            </a>
+            </td>
+        {/block:PreviousPage}
+            
+            
+        {block:Posts}
+            <td>
+            
+            {block:IndexPage}
+            {block:ifDaySeparator}
+                {block:NewDayDate}     
+                <table width=100px height={text:PostHeight} style="text-align:center;background-color:{color:PostBackground};opacity:{text:PostTransparency};border-radius:{text:CurveAmount};" border="0">
+                    <tr>
+                        <td>
+                            {ShortMonth}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            {DayOfMonth}<sup>{DayOfMonthSuffix}</sup>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            {Year}
+                        </td>
+                    </tr>
+                </table>
+                </td><td>
+                {/block:NewDayDate}
+            {/block:ifDaySeparator}
+            {/block:IndexPage}
+
+        <table border="0" {block:IndexPage}height={text:PostHeight}{/block:IndexPage}>
+            
+        {block:Text}     
+            <tr>
+                <td>
+                <div class="fulltable">
+                <table border="0">
+                    {block:Title}
+                    <tr>
+                        <td>
+                            <h3><a href="{Permalink}" class="h3">{Title}</a></h3>
+                            <hr>
+                        </td>
+                    </tr>
+                    {/block:Title}
+                    <tr>
+                    <td >
+                        <h2>{Body}
+                        {block:ContentSource} 
+                        (src <a href="{SourceURL}">{SourceTitle}</a>)
+                        {/block:ContentSource}</h2>
+                     </td>
+                    </tr>
+                    </table></div>
+                </td>
+            </tr>
+        {/block:Text}
+        
+        {block:Photo}
+            <tr>
+                <td>
+                <div class="fulltable">
+                <table border="0">
+                    <tr>
+                        <td width={text:PostWidth}>
+                    <h3 style="text-align:center;"><a href="{Permalink}" class="h3"><img style="opacity:1;border-radius:{text:CurveAmount};" src="{block:IndexPage}{PhotoURL-400}{/block:IndexPage}{block:PermalinkPage}{PhotoURL-500}{/block:PermalinkPage}" alt="{PhotoAlt}"/></a></h3>
+                        </td>
+                    </tr>
+                    <tr>
+                    <td>
+                        <h2>
+                        {block:Caption}
+                            {Caption}
+                        {/block:Caption}
+                        {block:ContentSource} 
+                        (src <a href="{SourceURL}">{SourceTitle}</a>)
+                        {/block:ContentSource}</h2>
+                     </td>
+                    </tr>
+                    </table></div>
+                </td>
+            </tr>
+        {/block:Photo}
+        
+         {block:Panorama}
+                <tr>
+                <td >
+                <div class="fulltable">
+                <table border="0">
+                    <tr>
+                        <td width={text:PostWidth}>
+                    <h3>{LinkOpenTag}
+                    <img style="opacity:1;border-radius:{text:CurveAmount};" src="{PhotoURL-Panorama}" alt="{PhotoAlt}"/>
+                    {LinkCloseTag}</h3>
+                    </td>
+                    </tr>
+                    <tr>
+                    <td>
+                        <h2>
+                        {block:Caption}
+                            {Caption}
+                        {/block:Caption}
+                        {block:ContentSource} 
+                        (src <a href="{SourceURL}">{SourceTitle}</a>)
+                        {/block:ContentSource}</h2>
+                     </td>
+                    </tr>
+                    </table></div>
+                </td>
+            </tr>
+        {/block:Panorama}
+        
+       {block:Photoset}
+            <tr>
+                <td >
+                <div class="fulltable">
+                <table border="0">
+                    <tr>
+                        <td width={text:PostWidth}>
+                    <h3 style="text-align:center;">
+                    <a href="{Permalink}">{Photoset-500}</a></h3>
+                        </td>
+                    </tr>
+                    <tr>
+                    <td>
+                    
+                        <h2>
+                        {block:Caption}
+                            {Caption}
+                        {/block:Caption}
+                        {block:ContentSource} 
+                        (src <a href="{SourceURL}">{SourceTitle}</a>)
+                        {/block:ContentSource}</h2>
+                     </td>
+                    </tr>
+                    </table></div>
+                </td>
+            </tr>
+        {/block:Photoset}
+        
+        {block:Quote}
+         <tr>
+                <td >
+                <div class="fulltable">
+                <table border="0">
+                    <tr>
+                        <td>
+                            <h3><a href="{Permalink}" class="h3">"{Quote}"</a></h3>
+                        </td>
+                    </tr>
+                    <tr>
+                    <td>
+                        <h2>
+                        {block:Source}
+                        -{Source}
+                        {/block:Source}
+                        <br>
+                        {block:ContentSource} 
+                        (src <a href="{SourceURL}">{SourceTitle}</a>)
+                        {/block:ContentSource}</h2>
+                     </td>
+                    </tr>
+                    </table></div>
+                </td>
+            </tr>
+        {/block:Quote}
+        
+        {block:Link}
+            <tr>
+                <td >
+                <div class="fulltable">
+                <table border="0">
+                    <tr>
+                        <td style="border-radius:{text:CurveAmount};background-color:{color:Buttons};">
+                            <h3><a href="{URL}" {Target}>{Name}</a></h3>
+                        </td>
+                    </tr>
+                    <tr>
+                    <td>
+                        <h2>
+                        {block:Description}
+                            {Description}
+                        {/block:Description}
+                        {block:ContentSource} 
+                        (src <a href="{SourceURL}">{SourceTitle}</a>)
+                        {/block:ContentSource}</h2>
+                     </td>
+                    </tr>
+                    </table></div>
+                </td>
+            </tr>
+        {/block:Link}
+        
+        {block:Chat}
+         <tr>
+                <td >
+                <div class="fulltable">
+                <table border="0">
+                    {block:Title}
+                    <tr>
+                        <td>
+                            <h3><a href="{Permalink}" class="h3">{Title}</a></h3>
+                            <hr>
+                        </td>
+                    </tr>
+                    {/block:Title}
+                    <tr>
+                    <td>
+                        <h2>{block:Lines}
+                        {block:Label}<b>{Label}</b>{/block:Label}
+                        {line}<br>
+                        {/block:Lines}
+                        {block:ContentSource} 
+                        (src <a href="{SourceURL}">{SourceTitle}</a>)
+                        {/block:ContentSource}</h2>
+                     </td>
+                    </tr>
+                    </table></div>
+                </td>
+            </tr>
+        {/block:Chat}
+        
+        {block:Video}
+            <tr height={text:PostHeight} >
+                <td>
+                <div class="fulltable">
+                <table border="0">
+                    <tr>
+                        <td width={text:PostWidth}>
+                    <h3 style="text-align:center;">{Video-400}</h3>
+                        </td>
+                    </tr>
+                    <tr>
+                    <td>
+                        <h2>
+                        {block:Caption}
+                            {Caption}
+                        {/block:Caption}
+                        {block:ContentSource} 
+                        (src <a href="{SourceURL}">{SourceTitle}</a>)
+                        {/block:ContentSource}</h2>
+                     </td>
+                    </tr>
+                    </table></div>
+                </td>
+            </tr>
+        {/block:Video}
+        
+        {block:Audio}
+            <tr>
+                <td>
+                <div class="fulltable">
+                <table border="0">
+                    <tr>
+                        <td width={text:PostWidth}>
+                    <h3 style="text-align:center;">{AudioPlayerBlack}</h3>
+                        </td>
+                    </tr>
+                    <tr>
+                    <td>
+                        <h2>
+                        {block:Caption}
+                            {Caption}
+                        {/block:Caption}
+                        {block:ContentSource} 
+                        (src <a href="{SourceURL}">{SourceTitle}</a>)
+                        {/block:ContentSource}</h2>
+                     </td>
+                    </tr>
+                    </table></div>
+                </td>
+            </tr>
+        {/block:Audio}
+        
+        {block:Answer}
+         <tr>
+                <td >
+                <div class="fulltable" width="200px">
+                <table border="0">
+                    <tr>
+                    <td>
+                        <table border="0" width=100%>
+                        <tr><td>
+                            <img style="border-radius:{text:CurveAmount};" src="{AskerPortraitURL-48}">
+                        </td><td class="answer">
+                                {Asker}:<br>{Question}
+                        </td></tr>
+                        </table>
+                    </td>
+                    </tr>
+                    <tr><td>
+                        <table border="0" width=100%>
+                        <tr><td class="answer">
+                                {block:Answerer}{Answerer}:<br>{/block:Answerer}
+                                {Answer}
+                        </td>
+                        {block:Answerer}<td>
+                            <img  style="border-radius:{text:CurveAmount};" src="{AnswererPortraitURL-48}">
+                        </td>{/block:Answerer}
+                        </tr>
+                        </table>
+                    </td></tr>
+                    {block:Answerer}<tr>
+                    <td>
+                        <h2>{Replies}</h2>
+                     </td>
+                    </tr>{/block:Answerer}
+                    </table></div>
+                </td>
+            </tr>
+        {/block:Answer}
+        
+
+            <tr class="roots"><td style="border-radius:{text:CurveAmount};" >
+            <table width=100% height=100% border="0">
+                    <tr height=100%>
+                        <td>
+                            {block:HasTags}
+                            <div class="tagbar">
+                            <table border="0" height=20px>
+                                <tr><td nowrap>
+                                {block:Tags}
+                                    <a href="{tagURL}">{Tag}</a>&nbsp
+                                {/block:Tags}
+                                </td></tr>
+                            </table>
+                            </div>
+                            {/block:HasTags}
+                        </td>
+                    </tr>
+                    <tr>
+                    <td>
+                    <a href="{Permalink}">
+                    <table width=100% border="0" class="mouseover" onmouseover="permaOn(this)" onmouseout="permOff(this)">
+                    {block:PermalinkPage}<tr><td></td><td>
+                        {block:date}
+                        {ShortMonth}{DayOfMonth}<sup>{DayOfMonthSuffix}</sup>,{Year}
+                        {/block:date}
+                    </td></tr>{/block:PermalinkPage}
+                    
+                    <tr>
+                        <td style="text-align:left;" width="150px">
+                        {block:NoteCount}
+                        {NoteCountWithLabel}
+                        {/block:NoteCount}
+                        </td>
+                        <td >
+                        {block:date}
+                        {TimeAgo}
+                        {/block:date}
+                        </td>
+                        <td width=20px>
+                        {block:ifActionButtonsWhite}
+                            {LikeButton color="White"} 
+                        {/block:ifActionButtonsWhite}
+                        {block:ifNotActionButtonsWhite}
+                            {LikeButton color="Black"} 
+                        {/block:ifNotActionButtonsWhite}
+                        </td>                        
+                        <td width=20px>
+                        {block:ifActionButtonsWhite}
+                            {ReblogButton color="White"} 
+                        {/block:ifActionButtonsWhite}
+                        {block:ifNotActionButtonsWhite}
+                            {ReblogButton color="Black"} 
+                        {/block:ifNotActionButtonsWhite}
+                        </td>
+                    </tr>
+                    </table></a>
+                    </td>
+                    </tr>
+                </table>
+            </td></tr>
+            </table>
+        </td>
+        {/block:Posts}
+        
+        {block:NextPage}
+            <td>
+            <a href="{NextPage}">
+                <table width=100px height={text:PostHeight} style="text-align:center;background-color:{color:PostBackground};opacity:{text:PostTransparency};border-radius:{text:CurveAmount};" border="0">
+                    <tr>
+                        <td class="changePage" onmouseover="buttonOn(this)" onmouseout="moreMeOff(this)">
+                            Next &#187;<br>{CurrentPage}/{TotalPages}
+                        </td>
+                    </tr>
+                </table>
+            </a>
+            </td>
+        {/block:NextPage}
+            
+        {block:PermalinkPage} 
+        {block:PostNotes}
+            </tr><tr>
+                <td>
+                <div class="fulltable" >
+                <table border="0">
+                    <tr>
+                        <td>
+                            <h3>Notes:</h3>
+                            <hr>
+                        </td>
+                    </tr>
+                    <tr>
+                    <td >
+                        <h2>{PostNotes}</h2>
+                     </td>
+                    </tr>
+                    </table></div>
+                </td>
+            </tr>
+        {/block:PostNotes}
+        {/block:PermalinkPage} 
+
+        </tr>
+        </table>
+
+        <script type="text/javascript">
+        var slide;
+        function permaOn(x){
+             x.style.backgroundColor="{color:Permalink}";
+        }
+        
+        function permOff(x){
+            x.style.backgroundColor="transparent";
+        }
+        function buttonOn(x){
+            x.style.backgroundColor="{color:ButtonSelect}";
+            x.style.color="black";
+        }
+        function buttonOff(x){
+            x.style.backgroundColor="{color:Buttons}";
+            x.style="opacity:0.5;";
+        }
+        function moreMeOff(x){
+            x.style.backgroundColor="transparent";
+            x.style.color="{color:Title}";
+        }
+        
+        function slideRight(){
+            slide=setInterval(function(){right()},1);
+        }
+        
+        function slideLeft(){
+            slide=setInterval(function(){left()},1);
+        }
+        
+        function slideOff(){
+            clearInterval(slide);
+        }
+        
+        function right(){
+            var current=0;
+            current=getScroll();
+            window.scrollTo(current+{text:ScrollSpeed},0);
+        }
+        
+        function left(){
+            var current=0;
+            current=getScroll();
+            window.scrollTo(current-{text:ScrollSpeed},0);
+        }
+        
+        function getScroll(){
+            var position
+            position=window.pageXOffset;
+            return position;
+        }
+        
+
+        </script>
+    </body>
+</html>
